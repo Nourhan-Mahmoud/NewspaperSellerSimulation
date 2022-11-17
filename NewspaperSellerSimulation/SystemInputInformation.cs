@@ -13,7 +13,8 @@ namespace NewspaperSellerSimulation
 {
     public partial class SystemInputInformation : Form
     {
-        private SimulationSystem simulationSystem;
+        
+        private string OpenedFilePath = "";
         public SystemInputInformation()
         {
             InitializeComponent();
@@ -26,7 +27,27 @@ namespace NewspaperSellerSimulation
 
         private void SystemInputInformation_Load(object sender, EventArgs e)
         {
-            simulationSystem = HomePage.return_simulationSystem();
+            SimulationSystem simulationSystem = new SimulationSystem();
+            
+            int testCaseNum = HomePage.return_testCaseNum();
+
+            if(testCaseNum == 1)
+            {
+                OpenedFilePath = "D:\\Nourhan\\ModelingAndSimulation\\NewspaperSellerSimulation_Students\\NewspaperSellerSimulation_Students\\NewspaperSellerSimulation\\TestCases\\TestCase1.txt";
+            }
+            else if(testCaseNum == 2)
+            {
+                OpenedFilePath = "D:\\Nourhan\\ModelingAndSimulation\\NewspaperSellerSimulation_Students\\NewspaperSellerSimulation_Students\\NewspaperSellerSimulation\\TestCases\\TestCase2.txt";
+            }
+            else if(testCaseNum == 3)
+            {
+                OpenedFilePath = "D:\\Nourhan\\ModelingAndSimulation\\NewspaperSellerSimulation_Students\\NewspaperSellerSimulation_Students\\NewspaperSellerSimulation\\TestCases\\TestCase3.txt";
+            }
+            else
+            {
+                MessageBox.Show("Please, choose a testcase");
+            }
+            simulationSystem.read_files(OpenedFilePath);
 
             NumOfNewspapers.Text = (simulationSystem.NumOfNewspapers).ToString();
             NumOfRecords.Text = (simulationSystem.NumOfRecords).ToString();
@@ -105,6 +126,16 @@ namespace NewspaperSellerSimulation
 
         //SellingPrice 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void show_Sys_table_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
