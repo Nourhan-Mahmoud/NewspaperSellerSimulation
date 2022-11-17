@@ -30,6 +30,7 @@
         {
             this.table = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.table2 = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // table
@@ -69,7 +70,7 @@
             this.table.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.table.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.table.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.table.Size = new System.Drawing.Size(1452, 852);
+            this.table.Size = new System.Drawing.Size(1474, 595);
             this.table.TabIndex = 0;
             // 
             // label1
@@ -84,11 +85,30 @@
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // table2
+            // 
+            this.table2.ColumnCount = 7;
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.table2.Location = new System.Drawing.Point(12, 703);
+            this.table2.Name = "table2";
+            this.table2.RowCount = 2;
+            this.table2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.table2.Size = new System.Drawing.Size(1474, 70);
+            this.table2.TabIndex = 1;
+            // 
             // SimulationTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1476, 953);
+            this.ClientSize = new System.Drawing.Size(1507, 800);
+            this.Controls.Add(this.table2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.table);
             this.Name = "SimulationTable";
@@ -103,5 +123,6 @@
 
         private System.Windows.Forms.TableLayoutPanel table;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel table2;
     }
 }

@@ -47,6 +47,7 @@ namespace NewspaperSellerSimulation
             }
             simulationSystem.read_files(OpenedFilePath);
             fill_simulationtable(simulationSystem);
+            fill_performance_table(simulationSystem);
 
         }
 
@@ -76,6 +77,26 @@ namespace NewspaperSellerSimulation
             }
 
         }
+
+        private void fill_performance_table(SimulationSystem s)
+        {
+            table2.Controls.Add(new Label() { Text = "TotalSalesProfit" }, 0, 0);
+            table2.Controls.Add(new Label() { Text = "TotalCost" }, 1, 0);
+            table2.Controls.Add(new Label() { Text = "TotalLostProfit" }, 2, 0);
+            table2.Controls.Add(new Label() { Text = "TotalScrapProfit" }, 3, 0);
+            table2.Controls.Add(new Label() { Text = "TotalNetProfit" }, 4, 0);
+            table2.Controls.Add(new Label() { Text = "DaysWithMoreDemand" }, 5, 0);
+            table2.Controls.Add(new Label() { Text = "DaysWithUnsoldPapers" }, 6, 0);
+
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.TotalSalesProfit.ToString() }, 0, 1);
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.TotalCost.ToString() }, 1, 1);
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.TotalLostProfit.ToString() }, 2, 1);
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.TotalScrapProfit.ToString() }, 3, 1);
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.TotalNetProfit.ToString() }, 4, 1);
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.DaysWithMoreDemand.ToString() }, 5, 1);
+            table2.Controls.Add(new Label() { Text = s.PerformanceMeasures.DaysWithUnsoldPapers.ToString() }, 6, 1);
+        }
+    
 
     }
 }
