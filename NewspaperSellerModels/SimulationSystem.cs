@@ -5,10 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
 namespace NewspaperSellerModels
 {
     public class SimulationSystem
     {
+        public static Random random = new Random();
+
         public SimulationSystem()
         {
             DayTypeDistributions = new List<DayTypeDistribution>();
@@ -217,6 +220,119 @@ namespace NewspaperSellerModels
 
 
             }
+
+            clac_output();
         }
+
+        public  void clac_output()
+        {
+            
+
+            for (int i = 1;i <= NumOfRecords; i++)
+            {
+                SimulationCase simulationCase = new SimulationCase();
+
+                simulationCase.DayNo = i;
+
+                simulationCase.RandomNewsDayType = random.Next(1, 100);
+                
+
+                for (int i_dayType = 0; i_dayType < 3; i_dayType++)
+                {
+                    if (simulationCase.RandomNewsDayType >= DayTypeDistributions[i_dayType].MinRange && simulationCase.RandomNewsDayType <= DayTypeDistributions[i_dayType].MaxRange)
+                    {
+                        simulationCase.NewsDayType =  DayTypeDistributions[i_dayType].DayType;
+                    }
+                }
+
+                
+                simulationCase.RandomDemand = random.Next(1, 100);
+                
+
+
+                for (int cnt =0; cnt<DemandDistributions.Count; cnt++)
+                {
+                    if (simulationCase.NewsDayType == Enums.DayType.Good)
+                    {
+                        if(simulationCase.RandomDemand >= DemandDistributions[cnt].DayTypeDistributions[0].MinRange && simulationCase.RandomDemand <= DemandDistributions[cnt].DayTypeDistributions[0].MaxRange)
+                        {
+                            simulationCase.Demand = DemandDistributions[cnt].Demand;
+                        }
+                    }
+                    else if (simulationCase.NewsDayType == Enums.DayType.Fair)
+                    {
+                        if (simulationCase.RandomDemand >= DemandDistributions[cnt].DayTypeDistributions[1].MinRange && simulationCase.RandomDemand <= DemandDistributions[cnt].DayTypeDistributions[1].MaxRange)
+                        {
+                            simulationCase.Demand = DemandDistributions[cnt].Demand;
+                        }
+                    }
+                    else if (simulationCase.NewsDayType == Enums.DayType.Poor)
+                    {
+                        if (simulationCase.RandomDemand >= DemandDistributions[cnt].DayTypeDistributions[2].MinRange && simulationCase.RandomDemand <= DemandDistributions[cnt].DayTypeDistributions[2].MaxRange)
+                        {
+                            simulationCase.Demand = DemandDistributions[cnt].Demand;
+                        }
+                    }
+                }
+
+                if (simulationCase.Demand >= NumOfNewspapers)
+                    simulationCase.SalesProfit = NumOfNewspapers * SellingPrice;
+                else
+                    simulationCase.SalesProfit = simulationCase.Demand * SellingPrice;
+
+                if (simulationCase.Demand <= NumOfNewspapers)
+                {
+                    simulationCase.LostProfit = 0;
+                    simulationCase.ScrapProfit = (NumOfNewspapers - simulationCase.Demand) * ScrapPrice;
+                }
+                else
+                {
+                    simulationCase.LostProfit = (simulationCase.Demand - NumOfNewspapers) * (SellingPrice - PurchasePrice);
+                    simulationCase.ScrapProfit = 0;
+                }
+
+                decimal cost = NumOfNewspapers * PurchasePrice;
+                simulationCase.DailyCost = NumOfNewspapers * PurchasePrice;
+                if (simulationCase.LostProfit == 0)
+                {
+                    simulationCase.DailyNetProfit = simulationCase.SalesProfit - cost + simulationCase.ScrapProfit;
+
+                }
+                if (simulationCase.ScrapProfit == 0)
+                {
+                    simulationCase.DailyNetProfit = simulationCase.SalesProfit - cost - simulationCase.LostProfit;
+                }
+
+                SimulationTable.Add(simulationCase);
+            }
+
+            calc_performance();
+        }
+
+        public void calc_performance()
+        {
+            PerformanceMeasures = new PerformanceMeasures();
+            for (int i = 0; i < SimulationTable.Count(); i++)
+            {
+                PerformanceMeasures.TotalCost += SimulationTable[i].DailyCost;
+                PerformanceMeasures.TotalLostProfit += SimulationTable[i].LostProfit;
+                PerformanceMeasures.TotalNetProfit += SimulationTable[i].DailyNetProfit;
+                PerformanceMeasures.TotalSalesProfit += SimulationTable[i].SalesProfit;
+                PerformanceMeasures.TotalScrapProfit += SimulationTable[i].ScrapProfit;
+                if (SimulationTable[i].Demand > NumOfNewspapers)
+                    PerformanceMeasures.DaysWithMoreDemand += 1;
+                else if (SimulationTable[i].Demand < NumOfNewspapers)
+                    PerformanceMeasures.DaysWithUnsoldPapers += 1;
+
+
+            }
+        }
+
+       
     }
+
+
+
+
+   
 }

@@ -132,7 +132,8 @@ namespace NewspaperSellerSimulation
 
         private void show_Sys_table_Click(object sender, EventArgs e)
         {
-
+            SimulationTable simulationTable = new SimulationTable();
+            simulationTable.Show();
         }
 
         private void label7_Click(object sender, EventArgs e)

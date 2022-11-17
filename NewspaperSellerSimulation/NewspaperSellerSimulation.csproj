@@ -57,6 +57,12 @@
     <Compile Include="HomePage.Designer.cs">
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimulationTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SimulationTable.Designer.cs">
+      <DependentUpon>SimulationTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="SystemInputInformation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SimulationTable.resx">
+      <DependentUpon>SimulationTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SystemInputInformation.resx">
       <DependentUpon>SystemInputInformation.cs</DependentUpon>
     </EmbeddedResource>
